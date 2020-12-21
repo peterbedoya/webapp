@@ -1,1 +1,28 @@
-<h3>Client-component</h3>
+<header>
+    <div class="fav-list-title">
+        <h3 class="fav-list-title-h3">HN Feed</h3>
+    </div>
+     <h3>We &#60;3 hacker news! </h3>
+    
+</header>
+
+<div>
+    <ul class="list">
+        <li *ngFor="let article of articleList" class="list-li" id="">
+            <a class="list-a" (click)="goToLink(article.post.story_url || article.post.url)" target="_blank">
+                <p>
+                    {{article.post.story_title || title}}
+                    <span class="author">
+                        - {{article.post.author}} -
+                    </span>
+                </p>
+            </a>
+            <span class="list-label">
+                <span>{{article?.post.created_at | date:'shortTime' | lowercase}}</span>
+            </span>
+            <span>
+                <a class="cancel-fav" (click)="onDelete(article.post.objectID)"><i class="fa fa-trash"></i></a>
+            </span>
+        </li>
+    </ul>
+</div>
