@@ -5,7 +5,7 @@ export type ArticleDocument = Article & Document;
 
 @Schema()
 export class Article {
-   @Prop()
+  @Prop()
   post: Schematype.Types.Mixed;
 
   @Prop()
