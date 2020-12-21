@@ -1,12 +1,13 @@
 
 import { HttpModule } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { getModelToken } from '@nestjs/mongoose';
 import { Test} from '@nestjs/testing';
 import { ArticleController } from './article.controller';
 import { ArticleService } from './article.service';
 import { Article } from './schemas/article.schema';
 
-describe('AticleController', () => {
+describe('ArticleController', () => {
   let articleController: ArticleController;
   let articleService: ArticleService;
 
@@ -17,7 +18,9 @@ describe('AticleController', () => {
         providers: [ArticleService,{
           provide: getModelToken(Article.name),
           useValue: Article,
-        }],
+        },
+        ConfigService
+      ],
       }).compile();
 
     articleService = moduleRef.get<ArticleService>(ArticleService);
@@ -27,12 +30,21 @@ describe('AticleController', () => {
   describe('findAll', () => {
     it('should return an array of articles', async () => {
       const result:any = [{
-        post:[],
-        status:false
+        post:[]
       }];
       jest.spyOn(articleService, 'findAll').mockImplementation(() => result);
 
       expect(await articleController.findAll()).toBe(result);
+    });
+  });
+  describe('statusUpdate', () => {
+    it('should  to update article', async () => {
+      const result:any = {
+        post:[]
+      };
+      jest.spyOn(articleService, 'statusUpdate').mockImplementation(() => result);
+
+      expect(await articleController.statusUpdate("13456789")).toBe(result);
     });
   });
 });

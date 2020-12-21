@@ -1,12 +1,11 @@
 
-import { Controller, Get, Logger } from '@nestjs/common';
+import { Controller, Get, Logger, Param, Post } from '@nestjs/common';
 import { ArticleService } from './article.service';
 import { Article } from './schemas/article.schema';
 
 @Controller('/article')
 export class ArticleController {
 
-  private readonly logger = new Logger(ArticleController.name);
 
   constructor(private readonly articleService: ArticleService) {}
 
@@ -14,6 +13,11 @@ export class ArticleController {
   @Get()
   async findAll(): Promise<Article[]> {
     return this.articleService.findAll();
+  }
+  
+  @Post('/:objectID')
+  async statusUpdate(@Param('objectID') objectID: string) : Promise<Article>{
+     return this.articleService.statusUpdate(objectID);
   }
   
   
