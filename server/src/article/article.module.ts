@@ -5,7 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Article, ArticleSchema } from './schemas/article.schema';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ConfigModule } from '@nestjs/config';
-import configuration from 'src/config/configuration';
+import configuration from '../config/configuration';
 @Module({
   imports: [
     MongooseModule.forFeature([{ name:Article.name, schema: ArticleSchema }]),

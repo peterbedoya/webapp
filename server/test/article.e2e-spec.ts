@@ -28,6 +28,12 @@ describe('Cats', () => {
       
   });
 
+  it(`/POST article`, () => {
+    return request(app.getHttpServer())
+      .get('/article')
+      .expect(200)
+      
+  });
   afterAll(async () => {
     await app.close();
   });

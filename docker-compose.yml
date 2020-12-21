@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  server-component:
+    image: server-component
+    build: ./server/
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongodb
+  
+  client-component:
+    image: client-component
+    build: ./client/
+    ports:
+      - 80:80
+    depends_on:
+      - server-component
+
+  mongodb:
+    image: mongo:latest
+    environment:
+      - MONGODB_DATABASE="test"
+    ports:
+      - 27017:27017

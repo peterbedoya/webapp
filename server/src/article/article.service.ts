@@ -45,7 +45,12 @@ export class ArticleService implements OnApplicationBootstrap {
   }
 
   async findAll(): Promise<Article[]> {
-    return this.articleModel.find().exec();
+    return this.articleModel.find({status:null}).sort({ 'post.created_at': -1 }).exec();
+  }
+
+  
+  async statusUpdate(objectID:string){
+    return await this.articleModel.updateOne({'post.objectID':objectID },{status:true},{ upsert : true })
   }
 
 }
